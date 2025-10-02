@@ -1,4 +1,10 @@
-# ReadMe File for Predicting Student Dropout and Graduation Using Enrollment Data
+# ReadMe File for Predicting Student Dropout and Graduation Using Enrollment Data 
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg?logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by/4.0/)
+[![DOI: 10.5281/zenodo.5777339](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.5777339-blue.svg?logo=zenodo)](https://doi.org/10.5281/zenodo.5777339)
+[![Data: UCI Repository](https://img.shields.io/badge/Data-UCI%20Repository-ff6f00.svg)](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)
+[![Python 3.10](https://img.shields.io/badge/Python-3.10-3776AB.svg?logo=python&logoColor=white)](#software-and-hardware)
+[![ORCID: 0009-0000-6763-0355](https://img.shields.io/badge/ORCID-0009--0000--6763--0355-A6CE39.svg?logo=orcid&logoColor=white)](https://orcid.org/0009-0000-6763-0355)
+[![Metadata: DDI-aligned](https://img.shields.io/badge/Metadata-DDI%E2%80%91aligned-8e44ad.svg)](#metadata-standard)
 ### A Learning Analytics Approach with Random Forests  
 **Author:** Lisa Sun  
 **Date:** 2025-10-01  
