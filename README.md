@@ -49,7 +49,7 @@ This project explores how higher education enrollment data can be leveraged to p
   *Designed for quick review without running code.*  
 
 - **`README.md`**  
-  The file you are reading.  
+  The current file.  
   - Documents **project context, dataset details, file descriptions, methods, and usage guidelines**.  
   - Serves as the **main reference** for understanding scope and purpose.  
 
@@ -68,7 +68,7 @@ This project explores how higher education enrollment data can be leveraged to p
 ### **Update History**
 
 - **Oct 2022** → Dataset first published  
-- **Jun 2025** → Dataset prepared, pipeline + outputs created  
+- **Jun 2025** → Dataset prepared, pipeline, and outputs created  
 - **Oct 2025** → Documentation finalized  
 
 *Future updates may add additional ML models or fairness analyses.*  
