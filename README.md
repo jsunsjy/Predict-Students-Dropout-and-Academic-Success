@@ -18,7 +18,29 @@
 - **Affiliation:** Teachers College, Columbia University
 - **Email:** ls4116@tc.columbia.edu  
 - **Language:** English  
-- **Keywords:** Academic performance, Multi-class classification, Machine learning  
+- **Keywords:** Academic performance, Multi-class classification, Machine learning
+- **Dates & Geography Information of Data Collection:**
+> <table style="border-collapse:collapse; width:100%; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;">
+>   <thead>
+>     <tr>
+>       <th style="border-bottom:2px solid #e1e4e8; text-align:left; padding:10px;">Aspect</th>
+>       <th style="border-bottom:2px solid #e1e4e8; text-align:left; padding:10px;">Original Dataset (Source)</th>
+>       <th style="border-bottom:2px solid #e1e4e8; text-align:left; padding:10px;">This Project (Analysis)</th>
+>     </tr>
+>   </thead>
+>   <tbody>
+>     <tr>
+>       <td style="border-top:1px solid #eaecef; padding:10px;"><strong>Date(s) of data collection</strong></td>
+>       <td style="border-top:1px solid #eaecef; padding:10px;">Academic years <strong>2008/2009–2018/2019</strong>; public release <strong>Oct 2022</strong></td>
+>       <td style="border-top:1px solid #eaecef; padding:10px;">Data retrieval <strong>Jun 2025</strong>; modeling, figures, and documentation <strong>Jun–Oct 2025</strong></td>
+>     </tr>
+>     <tr>
+>       <td style="border-top:1px solid #eaecef; padding:10px;"><strong>Geographic location</strong></td>
+>       <td style="border-top:1px solid #eaecef; padding:10px;"><strong>Portugal</strong> — single higher-education institution; national indicators from <strong>PORDATA (Portugal)</strong>; admissions from <strong>CNAES (Portugal)</strong></td>
+>       <td style="border-top:1px solid #eaecef; padding:10px;"><strong>New York, NY, USA</strong> (Teachers College, Columbia University); computation on <strong>Google Colab</strong> (cloud, Linux backend)</td>
+>     </tr>
+>   </tbody>
+> </table>
 
 ---
 
@@ -31,31 +53,35 @@ This project explores how higher education enrollment data can be leveraged to p
 
 ### **Filenames and Content**
 
-- **`student_dropout_data.csv`**  
-  Main dataset used for analysis.  
+- **`student_dropout_data.csv`**
+  > *Date Published: October 2022*
+  - Main dataset used for analysis.
   - Contains **4,424 anonymized student records** with **36 attributes** (demographic, socioeconomic, macroeconomic, academic).  
   - Aggregated from **institutional student records**, the **CNAES admissions database**, and **PORDATA** (macroeconomic indicators).  
   - Each row = one student.  
   - Target variable = **final status**: *dropout*, *enrolled*, or *graduate*.  
 
-- **`Code_pipeline.ipynb`**  
-  Jupyter Notebook documenting the **end-to-end workflow**:  
+- **`Code_pipeline.ipynb`**
+  > *Date Created: June 2025*
+  - Jupyter Notebook documenting the **end-to-end workflow**
   - Preprocessing & feature encoding  
   - Train/test splits  
   - Random Forest model training  
   - Evaluation metrics & subgroup fairness checks  
   - Generates graphs & tables used in results  
 
-- **`Final_Results_Graphs.pdf`**  
-  PDF summary of **key findings**:  
+- **`Final_Results_Graphs.pdf`**
+  > *Date Created: June 2025* 
+  - PDF summary of **key findings**
   - Feature importance rankings  
   - Confusion matrices  
   - Subgroup performance analyses  
   - Overall model metrics  
   *Designed for quick review without running code.*  
 
-- **`README.md`**  
-  The current file.  
+- **`README.md`**
+  > *Date Created: October 2025*
+  - The current file
   - Documents **project context, dataset details, file descriptions, methods, and usage guidelines**.  
   - Serves as the **main reference** for understanding scope and purpose.  
 
