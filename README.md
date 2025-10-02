@@ -107,7 +107,8 @@ This project explores how higher education enrollment data can be leveraged to p
 - **UCI Machine Learning Repository (publicly accessible):**  
   [https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success](https://archive.ics.uci.edu/dataset/697/predict+students+dropout+and+academic+success)  
 
-### **📝 Recommended Citation**
+> [!TIP]
+> ### **Recommended Citation**
 > Realinho, V., Machado, J., Baptista, L., & Martins, M. V. (2022).  
 > *Predicting Student Dropout and Academic Success* \[Data set\]. Zenodo.  
 > [https://doi.org/10.5281/zenodo.5777339](https://doi.org/10.5281/zenodo.5777339)  
@@ -144,36 +145,37 @@ Steps applied for this project:
 - Split into **80/20 training/testing sets** with stratification  
 - Applied **oversampling** to balance classes (~50/50) in the training set  
 
-**Preprocessing Syntax:**  
+> **📜 Preprocessing Syntax**
+>
+> ```python
+> from ucimlrepo import fetch_ucirepo
+> from sklearn.model_selection import train_test_split
+> from sklearn.utils import resample
+> import pandas as pd
+>
+> # Import dataset
+> ds = fetch_ucimlrepo(id=697)  # <-- if using ucimlrepo, correct function is fetch_ucirepo
+> X, y = ds.data.features, ds.data.targets
+>
+> # Clean target labels
+> y = y.iloc[:,0].map({'Dropout':0, 'Enrolled':1, 'Graduate':2}).astype(int)
+>
+> # Keep enrollment-only features
+> X = X.loc[:, ~X.columns.str.contains('(1st_sem|2nd_sem)', regex=True)]
+>
+> # Train/test split
+> X_train, X_test, y_train, y_test = train_test_split(
+>     X, y, test_size=0.2, stratify=y, random_state=42
+> )
+>
+> # Oversample minority (dropouts)
+> dropouts = X_train[y_train==0]
+> graduates = X_train[y_train==2]
+> dropouts_resampled = resample(dropouts, replace=True,
+>                               n_samples=len(graduates), random_state=42)
+> X_train_bal = pd.concat([dropouts_resampled, graduates])
+> ```
 
-```python
-from ucimlrepo import fetch_ucirepo
-from sklearn.model_selection import train_test_split
-from sklearn.utils import resample
-import pandas as pd
-
-# Import dataset
-ds = fetch_ucirepo(id=697)
-X, y = ds.data.features, ds.data.targets
-
-# Clean target labels
-y = y.iloc[:,0].map({'Dropout':0, 'Enrolled':1, 'Graduate':2}).astype(int)
-
-# Keep enrollment-only features
-X = X.loc[:, ~X.columns.str.contains('(1st_sem|2nd_sem)', regex=True)]
-
-# Train/test split
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, stratify=y, random_state=42
-)
-
-# Oversample minority (dropouts)
-dropouts = X_train[y_train==0]
-graduates = X_train[y_train==2]
-dropouts_resampled = resample(dropouts, replace=True,
-                              n_samples=len(graduates), random_state=42)
-X_train_bal = pd.concat([dropouts_resampled, graduates])
-```
 
 ### 💻 Software and Hardware
 #### 🔧 Environment
@@ -187,22 +189,22 @@ X_train_bal = pd.concat([dropouts_resampled, graduates])
 - **ucimlrepo** → direct dataset access  
 - **Random Forest Classifier** → implemented using `sklearn.ensemble.RandomForestClassifier`  
 
-#### 📜 Syntax
-
-```python
-# Data handling & visualization
-import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# Machine learning model
-from sklearn.ensemble import RandomForestClassifier
-
-# Data splitting & evaluation
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
-```
+> #### 📜 Libraries’ Syntax
+>
+> ```python
+> # Data handling & visualization
+> import pandas as pd
+> import numpy as np
+> import seaborn as sns
+> import matplotlib.pyplot as plt
+>
+> # Machine learning model
+> from sklearn.ensemble import RandomForestClassifier
+>
+> # Data splitting & evaluation
+> from sklearn.model_selection import train_test_split
+> from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+> ```
 
 ### 📄 Standards and Calibration
 Variables were encoded consistently across student records (categorical values standardized, continuous values expressed in comparable numeric scales). No external calibration instruments were required.
@@ -215,67 +217,102 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 - Consistent Categorical Coding — Verified that key categorical fields use only valid, expected codes.
 - Balanced Training Set — To reduce bias toward the majority outcome, the binary training set was balanced via random oversampling of the minority class. Oversampling was applied only to the training split to prevent leakage into the test set.
 
-```python
-# Check for missing values across all features
-missing_total = int(X.isna().sum().sum())
-print(f"Missing values in X (should be 0): {missing_total}")
+#### 📜 Checks' Syntax
 
-# Inspect unique codes for selected categorical variables
-cat_cols = [
-    "marital_status",
-    "nationality",
-    "mother_qualification",
-    "father_qualification",
-    "mother_occupation",
-    "father_occupation",
-    "application_mode",
-    "daytime_evening_attendance",
-    "gender",
-    "scholarship_holder",
-    "displaced",
-    "educational_special_needs",
-    "tuition_fees_up_to_date",
-    "international_student"
-]
-
-# Only check columns that exist in X to avoid KeyError
-for col in [c for c in cat_cols if c in X.columns]:
-    print(f"{col}: {sorted(X[col].unique().tolist())[:25]}{' ...' if X[col].nunique() > 25 else ''}")
-
-from sklearn.utils import resample
-import pandas as pd
-
-# Context: assumes X_train_binary and y_train_binary were created earlier
-#          (e.g., by filtering the original 3-class target to {0=Dropout, 2=Graduate})
-
-df_train = X_train_binary.copy()
-df_train["Target"] = y_train_binary
-
-# Split into class-specific frames
-dropouts  = df_train[df_train["Target"] == 0]
-graduates = df_train[df_train["Target"] == 2]
-
-# Oversample the minority class to match the majority size
-if len(dropouts) < len(graduates):
-    dropouts_bal = resample(dropouts, replace=True,
-                            n_samples=len(graduates), random_state=42)
-    df_balanced = pd.concat([dropouts_bal, graduates], axis=0)
-else:
-    graduates_bal = resample(graduates, replace=True,
-                             n_samples=len(dropouts), random_state=42)
-    df_balanced = pd.concat([dropouts, graduates_bal], axis=0)
-
-# Shuffle the balanced training set
-df_balanced = df_balanced.sample(frac=1, random_state=42).reset_index(drop=True)
-
-# Confirm balance
-class_pct = (df_balanced["Target"].value_counts(normalize=True) * 100).round(1)
-print("Balanced train class %:\n", class_pct)
-
-# Final X/y for training
-X_train_bal = df_balanced.drop(columns="Target")
-y_train_bal = df_balanced["Target"]
-```
+> <details>
+> <summary><strong>Missing Values Check</strong></summary>
+>
+> Quickly verifies that all features are present and non-missing.
+>
+> ```python
+> # Check for missing values across all features
+> missing_total = int(X.isna().sum().sum())
+> print(f"Missing values in X (should be 0): {missing_total}")
+> ```
+> </details>
+>
+> <details>
+> <summary><strong>Categorical Code Audit</strong></summary>
+>
+> Confirms that integer-coded categorical fields only contain valid, expected codes.  
+> Guarded to avoid KeyError if any column is absent.
+>
+> ```python
+> # Inspect unique codes for selected categorical variables
+> cat_cols = [
+>     "marital_status",
+>     "nationality",
+>     "mother_qualification",
+>     "father_qualification",
+>     "mother_occupation",
+>     "father_occupation",
+>     "application_mode",
+>     "daytime_evening_attendance",
+>     "gender",
+>     "scholarship_holder",
+>     "displaced",
+>     "educational_special_needs",
+>     "tuition_fees_up_to_date",
+>     "international_student"
+> ]
+>
+> # Only check columns that exist in X to avoid KeyError
+> for col in [c for c in cat_cols if c in X.columns]:
+>     unique_vals = sorted(X[col].unique().tolist())
+>     preview = unique_vals[:25]
+>     suffix = " ..." if len(unique_vals) > 25 else ""
+>     print(f"{col}: {preview}{suffix}")
+> ```
+> </details>
+>
+> <details>
+> <summary><strong>Class Balancing (Oversampling)</strong></summary>
+>
+> Creates a ~50/50 balanced training set for the binary task (0 = Dropout, 2 = Graduate).  
+> Assumes `X_train_binary` and `y_train_binary` were prepared earlier (e.g., by filtering out class `1 = Enrolled`).
+>
+> ```python
+> from sklearn.utils import resample
+> import pandas as pd
+>
+> # Combine features and target for convenience
+> df_train = X_train_binary.copy()
+> df_train["Target"] = y_train_binary
+>
+> # Split into class-specific frames
+> dropouts  = df_train[df_train["Target"] == 0]
+> graduates = df_train[df_train["Target"] == 2]
+>
+> # Oversample the minority class to match the majority size
+> if len(dropouts) < len(graduates):
+>     dropouts_bal = resample(
+>         dropouts, replace=True,
+>         n_samples=len(graduates), random_state=42
+>     )
+>     df_balanced = pd.concat([dropouts_bal, graduates], axis=0)
+> else:
+>     graduates_bal = resample(
+>         graduates, replace=True,
+>         n_samples=len(dropouts), random_state=42
+>     )
+>     df_balanced = pd.concat([dropouts, graduates_bal], axis=0)
+>
+> # Shuffle the balanced training set
+> df_balanced = (
+>     df_balanced
+>     .sample(frac=1, random_state=42)
+>     .reset_index(drop=True)
+> )
+>
+> # Confirm balance
+> class_pct = (df_balanced["Target"].value_counts(normalize=True) * 100).round(1)
+> print("Balanced train class %:\n", class_pct)
+>
+> # Final X/y for downstream training
+> X_train_bal = df_balanced.drop(columns="Target")
+> y_train_bal = df_balanced["Target"]
+> ```
+> </details>
 
 #### Quick Summary
 - Missing values: None detected in feature matrix.
@@ -307,7 +344,7 @@ y_train_bal = df_balanced["Target"]
 - **Cases (rows):** 4,424 student records  
 - **Variables (columns):** 36 attributes
 
-> **Reproducible counts (optional)**
+> **Syntax for Reproducible Counts**
 >
 > ```python
 > import pandas as pd
@@ -317,10 +354,10 @@ y_train_bal = df_balanced["Target"]
 > print({"rows": X.shape[0], "cols": X.shape[1]})
 > ```
 
-### 2) Variable List — Data Dictionary (36 Variables)
+### 2) 📖 Data Dictionary (36 Variables)
 
 <details>
-<summary><b>Expand Data Dictionary</b></summary>
+<summary><b>🟢 Click to Expand Data Dictionary</b></summary>
 
 <table>
   <thead>
@@ -610,7 +647,7 @@ y_train_bal = df_balanced["Target"]
 ### 5) Specialized Formats / Abbreviations
 - Distributed as **CSV (UTF-8)**  
 - Categorical variables stored as **integer codes**  
-- Outcome variable **target** encoded as `0 = Dropout`, `1 = Enrolled`, `2 = Graduate
+- Outcome variable **target** encoded as `0 = Dropout`, `1 = Enrolled`, `2 = Graduate`
 
 ---
 
