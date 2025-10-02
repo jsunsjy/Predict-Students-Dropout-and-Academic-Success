@@ -15,7 +15,7 @@
 - **Title:** Predicting Student Dropout and Graduation Using Enrollment Data: A Learning Analytics Approach with Random Forests 
 - **Principal Investigator:** Lisa Sun  
 - **ORCID iD:** 0009-0000-6763-0355  
-- **Affiliation:** Teachers College, Columbia University  
+- **Affiliation:** Teachers College, Columbia University
 - **Email:** ls4116@tc.columbia.edu  
 - **Language:** English  
 - **Keywords:** Academic performance, Multi-class classification, Machine learning  
@@ -642,7 +642,7 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 - **Counts:** Integer counts for curricular-unit fields (credited, enrolled, approved, evaluations)
 
 ### 4) Missing-Data Codes
-- No missing-value codes are present
+- No missing-Data
 
 ### 5) Specialized Formats / Abbreviations
 - Distributed as **CSV (UTF-8)**  
