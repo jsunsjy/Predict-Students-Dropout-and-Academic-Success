@@ -382,282 +382,245 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 
 ### 2) 📖 Data Dictionary (36 Variables)
 
-<details>
-<summary><b>🟢 Click to Expand Data Dictionary</b></summary>
+<!-- Data Dictionary: default OPEN; click summary to toggle -->
+<details open>
+  <summary><strong>📚 Data Dictionary — click to collapse / expand</strong></summary>
+  <br/>
 
-<table>
-  <thead>
-    <tr>
-      <th>Variable Name (Raw)</th>
-      <th>Full Name</th>
-      <th>Definition / Description</th>
-      <th>Data Type</th>
-      <th>Units of Measurement</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>marital_status</td>
-      <td>Marital Status</td>
-      <td>Student’s marital status at enrollment (1 = Single, 2 = Married, 3 = Widower, 4 = Divorced, etc.).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>application_mode</td>
-      <td>Application Mode</td>
-      <td>Admission pathway (general contingent, transfer, international, ordinance-based, etc.).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>application_order</td>
-      <td>Application Order</td>
-      <td>Priority of the program chosen (0 = First choice; 9 = Last choice).</td>
-      <td>Integer</td>
-      <td>Rank (0–9)</td>
-    </tr>
-    <tr>
-      <td>course</td>
-      <td>Course</td>
-      <td>Degree program (e.g., Nursing, Informatics Engineering, Management).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>daytime_evening_attendance</td>
-      <td>Daytime/Evening Attendance</td>
-      <td>Attendance mode (1 = Daytime; 0 = Evening).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>previous_qualification</td>
-      <td>Previous Qualification</td>
-      <td>Highest education level before admission (Secondary, Bachelor’s, Master’s, Doctorate).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>previous_qualification_grade</td>
-      <td>Previous Qualification Grade</td>
-      <td>Grade from prior qualification on a 0–200 scale.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Score (0–200)</td>
-    </tr>
-    <tr>
-      <td>nationality</td>
-      <td>Nationality</td>
-      <td>Student’s nationality (integer-coded; e.g., 1 = Portuguese, 41 = Brazilian, 109 = Colombian).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>mother_qualification</td>
-      <td>Mother’s Qualification</td>
-      <td>Mother’s highest education level (Secondary, Higher Education, Master’s, Doctorate).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>father_qualification</td>
-      <td>Father’s Qualification</td>
-      <td>Father’s highest education level (same coding as above).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>mother_occupation</td>
-      <td>Mother’s Occupation</td>
-      <td>Mother’s occupation group (e.g., health professional, teacher, administrative staff, unskilled worker).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>father_occupation</td>
-      <td>Father’s Occupation</td>
-      <td>Father’s occupation group (coded similarly to mother’s).</td>
-      <td>Integer (Categorical)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>admission_grade</td>
-      <td>Admission Grade</td>
-      <td>Final admission grade (0–200 scale).</td>
-      <td>Continuous (Numeric)</td>
-      <td>Score (0–200)</td>
-    </tr>
-    <tr>
-      <td>displaced</td>
-      <td>Displaced Student</td>
-      <td>Indicates if the student relocated to attend (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>educational_special_needs</td>
-      <td>Educational Special Needs</td>
-      <td>Registered special needs (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>debtor</td>
-      <td>Debtor</td>
-      <td>Presence of unpaid tuition fees (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>tuition_fees_up_to_date</td>
-      <td>Tuition Fees Up to Date</td>
-      <td>Tuition payments fully up to date (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>gender</td>
-      <td>Gender</td>
-      <td>Student’s gender (1 = Male; 0 = Female).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>scholarship_holder</td>
-      <td>Scholarship Holder</td>
-      <td>Indicates scholarship status (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>age_at_enrollment</td>
-      <td>Age at Enrollment</td>
-      <td>Student age at the time of enrollment.</td>
-      <td>Integer</td>
-      <td>Years</td>
-    </tr>
-    <tr>
-      <td>international_student</td>
-      <td>International Student</td>
-      <td>Enrollment as an international student (1 = Yes; 0 = No).</td>
-      <td>Integer (Binary)</td>
-      <td>N/A</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_credited</td>
-      <td>Curricular Units 1st Sem (Credited)</td>
-      <td>Number of curricular units credited in the first semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_enrolled</td>
-      <td>Curricular Units 1st Sem (Enrolled)</td>
-      <td>Number of curricular units enrolled in during the first semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_evaluations</td>
-      <td>Curricular Units 1st Sem (Evaluations)</td>
-      <td>Number of evaluations/tests taken in the first semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_approved</td>
-      <td>Curricular Units 1st Sem (Approved)</td>
-      <td>Number of curricular units passed in the first semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_grade</td>
-      <td>Curricular Units 1st Sem (Grade)</td>
-      <td>Average grade in the first semester.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Score (0–20)</td>
-    </tr>
-    <tr>
-      <td>cu_1st_sem_without_evaluations</td>
-      <td>Curricular Units 1st Sem (No Evaluation)</td>
-      <td>Number of curricular units without evaluations in the first semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_credited</td>
-      <td>Curricular Units 2nd Sem (Credited)</td>
-      <td>Number of curricular units credited in the second semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_enrolled</td>
-      <td>Curricular Units 2nd Sem (Enrolled)</td>
-      <td>Number of curricular units enrolled in during the second semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_evaluations</td>
-      <td>Curricular Units 2nd Sem (Evaluations)</td>
-      <td>Number of evaluations/tests taken in the second semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_approved</td>
-      <td>Curricular Units 2nd Sem (Approved)</td>
-      <td>Number of curricular units passed in the second semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_grade</td>
-      <td>Curricular Units 2nd Sem (Grade)</td>
-      <td>Average grade in the second semester.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Score (0–20)</td>
-    </tr>
-    <tr>
-      <td>cu_2nd_sem_without_evaluations</td>
-      <td>Curricular Units 2nd Sem (No Evaluation)</td>
-      <td>Number of curricular units without evaluations in the second semester.</td>
-      <td>Integer</td>
-      <td>Count</td>
-    </tr>
-    <tr>
-      <td>unemployment_rate</td>
-      <td>Unemployment Rate</td>
-      <td>National unemployment rate during the enrollment year.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Percent (%)</td>
-    </tr>
-    <tr>
-      <td>inflation_rate</td>
-      <td>Inflation Rate</td>
-      <td>National inflation rate during the enrollment year.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Percent (%)</td>
-    </tr>
-    <tr>
-      <td>gdp</td>
-      <td>Gross Domestic Product (GDP)</td>
-      <td>National GDP indicator for the enrollment year.</td>
-      <td>Continuous (Numeric)</td>
-      <td>Currency (Index)</td>
-    </tr>
-    <tr>
-      <td>target</td>
-      <td>Outcome (Target Variable)</td>
-      <td>Final student outcome: 0 = Dropout, 1 = Enrolled, 2 = Graduate.</td>
-      <td>Categorical (3-class)</td>
-      <td>N/A</td>
-    </tr>
-  </tbody>
-</table>
-
+  <table>
+    <thead>
+      <tr>
+        <th>Variable Name</th>
+        <th>Full Name</th>
+        <th>Variable Definition</th>
+        <th>Measurement Units</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>marital_status</td>
+        <td>Marital Status</td>
+        <td>Student’s marital status at enrollment (1 = Single, 2 = Married, 3 = Widower, 4 = Divorced, etc.).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>application_mode</td>
+        <td>Application Mode</td>
+        <td>Admission pathway (general contingent, transfer, international, ordinance-based, etc.).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>application_order</td>
+        <td>Application Order</td>
+        <td>Priority of the program chosen (0 = First choice; 9 = Last choice).</td>
+        <td>Rank (0–9)</td>
+      </tr>
+      <tr>
+        <td>course</td>
+        <td>Course</td>
+        <td>Degree program (e.g., Nursing, Informatics Engineering, Management).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>daytime_evening_attendance</td>
+        <td>Daytime/Evening Attendance</td>
+        <td>Attendance mode (1 = Daytime; 0 = Evening).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>previous_qualification</td>
+        <td>Previous Qualification</td>
+        <td>Highest education level before admission (Secondary, Bachelor’s, Master’s, Doctorate).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>previous_qualification_grade</td>
+        <td>Previous Qualification Grade</td>
+        <td>Grade from prior qualification on a 0–200 scale.</td>
+        <td>Score (0–200)</td>
+      </tr>
+      <tr>
+        <td>nationality</td>
+        <td>Nationality</td>
+        <td>Student’s nationality (integer-coded; e.g., 1 = Portuguese, 41 = Brazilian, 109 = Colombian).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>mother_qualification</td>
+        <td>Mother’s Qualification</td>
+        <td>Mother’s highest education level (Secondary, Higher Education, Master’s, Doctorate).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>father_qualification</td>
+        <td>Father’s Qualification</td>
+        <td>Father’s highest education level (same coding as above).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>mother_occupation</td>
+        <td>Mother’s Occupation</td>
+        <td>Mother’s occupation group (e.g., health professional, teacher, administrative staff, unskilled worker).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>father_occupation</td>
+        <td>Father’s Occupation</td>
+        <td>Father’s occupation group (coded similarly to mother’s).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>admission_grade</td>
+        <td>Admission Grade</td>
+        <td>Final admission grade (0–200 scale).</td>
+        <td>Score (0–200)</td>
+      </tr>
+      <tr>
+        <td>displaced</td>
+        <td>Displaced Student</td>
+        <td>Indicates if the student relocated to attend (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>educational_special_needs</td>
+        <td>Educational Special Needs</td>
+        <td>Registered special needs (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>debtor</td>
+        <td>Debtor</td>
+        <td>Presence of unpaid tuition fees (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>tuition_fees_up_to_date</td>
+        <td>Tuition Fees Up to Date</td>
+        <td>Tuition payments fully up to date (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>gender</td>
+        <td>Gender</td>
+        <td>Student’s gender (1 = Male; 0 = Female).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>scholarship_holder</td>
+        <td>Scholarship Holder</td>
+        <td>Indicates scholarship status (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>age_at_enrollment</td>
+        <td>Age at Enrollment</td>
+        <td>Student age at the time of enrollment.</td>
+        <td>Years</td>
+      </tr>
+      <tr>
+        <td>international_student</td>
+        <td>International Student</td>
+        <td>Enrollment as an international student (1 = Yes; 0 = No).</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_credited</td>
+        <td>Curricular Units 1st Sem (Credited)</td>
+        <td>Number of curricular units credited in the first semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_enrolled</td>
+        <td>Curricular Units 1st Sem (Enrolled)</td>
+        <td>Number of curricular units enrolled in during the first semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_evaluations</td>
+        <td>Curricular Units 1st Sem (Evaluations)</td>
+        <td>Number of evaluations/tests taken in the first semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_approved</td>
+        <td>Curricular Units 1st Sem (Approved)</td>
+        <td>Number of curricular units passed in the first semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_grade</td>
+        <td>Curricular Units 1st Sem (Grade)</td>
+        <td>Average grade in the first semester.</td>
+        <td>Score (0–20)</td>
+      </tr>
+      <tr>
+        <td>cu_1st_sem_without_evaluations</td>
+        <td>Curricular Units 1st Sem (No Evaluation)</td>
+        <td>Number of curricular units without evaluations in the first semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_credited</td>
+        <td>Curricular Units 2nd Sem (Credited)</td>
+        <td>Number of curricular units credited in the second semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_enrolled</td>
+        <td>Curricular Units 2nd Sem (Enrolled)</td>
+        <td>Number of curricular units enrolled in during the second semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_evaluations</td>
+        <td>Curricular Units 2nd Sem (Evaluations)</td>
+        <td>Number of evaluations/tests taken in the second semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_approved</td>
+        <td>Curricular Units 2nd Sem (Approved)</td>
+        <td>Number of curricular units passed in the second semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_grade</td>
+        <td>Curricular Units 2nd Sem (Grade)</td>
+        <td>Average grade in the second semester.</td>
+        <td>Score (0–20)</td>
+      </tr>
+      <tr>
+        <td>cu_2nd_sem_without_evaluations</td>
+        <td>Curricular Units 2nd Sem (No Evaluation)</td>
+        <td>Number of curricular units without evaluations in the second semester.</td>
+        <td>Count</td>
+      </tr>
+      <tr>
+        <td>unemployment_rate</td>
+        <td>Unemployment Rate</td>
+        <td>National unemployment rate during the enrollment year.</td>
+        <td>Percent (%)</td>
+      </tr>
+      <tr>
+        <td>inflation_rate</td>
+        <td>Inflation Rate</td>
+        <td>National inflation rate during the enrollment year.</td>
+        <td>Percent (%)</td>
+      </tr>
+      <tr>
+        <td>gdp</td>
+        <td>Gross Domestic Product (GDP)</td>
+        <td>National GDP indicator for the enrollment year.</td>
+        <td>Currency (Index)</td>
+      </tr>
+      <tr>
+        <td>target</td>
+        <td>Outcome (Target Variable)</td>
+        <td>Final student outcome: 0 = Dropout, 1 = Enrolled, 2 = Graduate.</td>
+        <td>N/A</td>
+      </tr>
+    </tbody>
+  </table>
 </details>
 
 ### 3) Units of Measurement
@@ -667,10 +630,10 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 - **Macroeconomic indicators:** Percent (%) for unemployment and inflation; GDP as indexed currency  
 - **Counts:** Integer counts for curricular-unit fields (credited, enrolled, approved, evaluations)
 
-### 4) Missing-Data Codes
-- No missing-Data
+### Missing-Data Codes
+- No missing data
 
-### 5) Specialized Formats / Abbreviations
+### Specialized Formats / Abbreviations
 - Distributed as **CSV (UTF-8)**  
 - Categorical variables stored as **integer codes**  
 - Outcome variable **target** encoded as `0 = Dropout`, `1 = Enrolled`, `2 = Graduate`
