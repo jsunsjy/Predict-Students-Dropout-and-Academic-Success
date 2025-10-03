@@ -627,8 +627,8 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 ### 3) Units of Measurement - Summary (Details See Data Dictionary Above)
 > **Breakdown:** **19 predictors with units**, **17 predictors N/A**, **1 target (categorical) N/A**
 - **Count (integer events)**  
-  - *Curricular units — first semester (5) 
-  - *Curricular units — second semester (5)
+  - Curricular units — first semester (5) 
+  - Curricular units — second semester (5)
 - **Score (0–200):** `previous_qualification_grade`, `admission_grade`  
 - **Semester grade (0–20):** `cu_1st_sem_grade`, `cu_2nd_sem_grade`  
 - **Time — years:** `age_at_enrollment`  
