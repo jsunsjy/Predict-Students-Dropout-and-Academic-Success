@@ -56,10 +56,11 @@ This project explores how higher education enrollment data can be leveraged to p
 - **`student_dropout_data.csv`**
   > *Date Published: October 2022*
   - Main dataset used for analysis.
-  - Contains **4,424 anonymized student records** with **36 attributes** (demographic, socioeconomic, macroeconomic, academic).  
+  - Contains **4,424 anonymized student records** with **36 predictors** (demographic, socioeconomic, macroeconomic, academic) and **1 target variable** (whether students drop out, enroll, or graduate).  
   - Aggregated from **institutional student records**, the **CNAES admissions database**, and **PORDATA** (macroeconomic indicators).  
   - Each row = one student.  
-  - Target variable = **final status**: *dropout*, *enrolled*, or *graduate*.  
+  - Target variable = **outcome**: *dropout*, *enrolled*, or *graduate*.
+    - 3-class categorical outcome recorded at the end of the program’s nominal duration (eg, typically 3 years; 4 years for Nursing): 0 = Dropout (left or transferred), 1 = Enrolled (still studying), 2 = Graduate (completed on time).
 
 - **`Code_pipeline.ipynb`**
   > *Date Created: June 2025*
@@ -88,7 +89,7 @@ This project explores how higher education enrollment data can be leveraged to p
 ### **Dataset Structure**
 
 - Organized as a **self-contained data package**  
-- All attributes stored in **CSV file**  
+- All predictors and target variables stored in **CSV file**  
 - Other files (code, results, docs) **reference the dataset directly**
 
 ### **Creation Date**
@@ -162,14 +163,14 @@ Accessible at:
 ### ⚙️ Data Processing  
 
 Steps applied for this project:  
-- Retrieved dataset from **UCI repository** using `ucimlrepo`  
-- Excluded `1st_sem` and `2nd_sem` features → retained only **enrollment-time features**  
-- Re-coded targets into binary classes:  
+- 1) Retrieved dataset from **UCI repository** using `ucimlrepo`  
+- 2) Excluded `1st_sem` and `2nd_sem` features → retained only **enrollment-time features**  
+- 3) Re-coded targets into binary classes:  
   - `0 = Dropout`  
   - `2 = Graduate`  
-- Excluded students still enrolled to sharpen comparisons  
-- Split into **80/20 training/testing sets** with stratification  
-- Applied **oversampling** to balance classes (~50/50) in the training set  
+- 4) Excluded students still enrolled to sharpen comparisons  
+- 5) Split into **80/20 training/testing sets** with stratification  
+- 6) Applied **oversampling** to balance classes (~50/50) in the training set  
 
 > **📜 Preprocessing Syntax**
 >
@@ -368,7 +369,7 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 
 ### 1) Number of Variables and Cases
 - **Cases (rows):** 4,424 student records  
-- **Variables (columns):** 36 attributes
+- **Variables (columns):** 36 predictors and 1 target variable (outcome)
 
 > **Syntax for Reproducible Counts**
 >
@@ -380,7 +381,7 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
 > print({"rows": X.shape[0], "cols": X.shape[1]})
 > ```
 
-### 2) 📖 Data Dictionary (36 Variables)
+### 2) 📖 Data Dictionary (36 predictors + 1 target variable)
 
 <!-- Data Dictionary: default OPEN; click summary to toggle -->
 <details open>
@@ -390,7 +391,7 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
   <table>
     <thead>
       <tr>
-        <th>Variable Name</th>
+        <th>Variable Name (CSV)</th>
         <th>Full Name</th>
         <th>Variable Definition</th>
         <th>Measurement Units</th>
@@ -398,242 +399,249 @@ Quality checks ensured the dataset and modeling pipeline were reliable and repro
     </thead>
     <tbody>
       <tr>
-        <td>marital_status</td>
+        <td>Marital status</td>
         <td>Marital Status</td>
         <td>Student’s marital status at enrollment (1 = Single, 2 = Married, 3 = Widower, 4 = Divorced, etc.).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>application_mode</td>
+        <td>Application mode</td>
         <td>Application Mode</td>
-        <td>Admission pathway (general contingent, transfer, international, ordinance-based, etc.).</td>
+        <td>Admission pathway (e.g., general contingent, transfer, international, ordinance-based).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>application_order</td>
+        <td>Application order</td>
         <td>Application Order</td>
-        <td>Priority of the program chosen (0 = First choice; 9 = Last choice).</td>
-        <td>Rank (0–9)</td>
+        <td>Priority/rank of the program choice (1 = first choice; 9 = last choice).</td>
+        <td>Rank (1–9)</td>
       </tr>
       <tr>
-        <td>course</td>
         <td>Course</td>
-        <td>Degree program (e.g., Nursing, Informatics Engineering, Management).</td>
+        <td>Course / Degree Program</td>
+        <td>Program in which the student enrolled (e.g., Nursing, Informatics Engineering, Management).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>daytime_evening_attendance</td>
-        <td>Daytime/Evening Attendance</td>
-        <td>Attendance mode (1 = Daytime; 0 = Evening).</td>
+        <td>Daytime/evening attendance</td>
+        <td>Attendance Period</td>
+        <td>Attendance mode of the program (1 = Daytime; 0 = Evening).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>previous_qualification</td>
+        <td>Previous qualification</td>
         <td>Previous Qualification</td>
-        <td>Highest education level before admission (Secondary, Bachelor’s, Master’s, Doctorate).</td>
+        <td>Highest education level obtained before admission (e.g., Secondary, Bachelor’s, Master’s, Doctorate).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>previous_qualification_grade</td>
+        <td>Previous qualification (grade)</td>
         <td>Previous Qualification Grade</td>
         <td>Grade from prior qualification on a 0–200 scale.</td>
         <td>Score (0–200)</td>
       </tr>
       <tr>
-        <td>nationality</td>
+        <td>Nacionality</td>
         <td>Nationality</td>
         <td>Student’s nationality (integer-coded; e.g., 1 = Portuguese, 41 = Brazilian, 109 = Colombian).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>mother_qualification</td>
+        <td>Mother's qualification</td>
         <td>Mother’s Qualification</td>
-        <td>Mother’s highest education level (Secondary, Higher Education, Master’s, Doctorate).</td>
+        <td>Mother’s highest education level (e.g., Secondary, Higher Education, Master’s, Doctorate).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>father_qualification</td>
+        <td>Father's qualification</td>
         <td>Father’s Qualification</td>
         <td>Father’s highest education level (same coding as above).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>mother_occupation</td>
+        <td>Mother's occupation</td>
         <td>Mother’s Occupation</td>
         <td>Mother’s occupation group (e.g., health professional, teacher, administrative staff, unskilled worker).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>father_occupation</td>
+        <td>Father's occupation</td>
         <td>Father’s Occupation</td>
         <td>Father’s occupation group (coded similarly to mother’s).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>admission_grade</td>
+        <td>Admission grade</td>
         <td>Admission Grade</td>
-        <td>Final admission grade (0–200 scale).</td>
+        <td>Final admission grade to the institution (0–200 scale).</td>
         <td>Score (0–200)</td>
       </tr>
       <tr>
-        <td>displaced</td>
+        <td>Displaced</td>
         <td>Displaced Student</td>
-        <td>Indicates if the student relocated to attend (1 = Yes; 0 = No).</td>
+        <td>Indicates if the student relocated to attend the institution (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>educational_special_needs</td>
+        <td>Educational special needs</td>
         <td>Educational Special Needs</td>
-        <td>Registered special needs (1 = Yes; 0 = No).</td>
+        <td>Registered special educational needs (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>debtor</td>
+        <td>Debtor</td>
         <td>Debtor</td>
         <td>Presence of unpaid tuition fees (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>tuition_fees_up_to_date</td>
-        <td>Tuition Fees Up to Date</td>
-        <td>Tuition payments fully up to date (1 = Yes; 0 = No).</td>
+        <td>Tuition fees up to date</td>
+        <td>Tuition Fees Up To Date</td>
+        <td>Whether tuition payments are fully up to date (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>gender</td>
+        <td>Gender</td>
         <td>Gender</td>
         <td>Student’s gender (1 = Male; 0 = Female).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>scholarship_holder</td>
+        <td>Scholarship holder</td>
         <td>Scholarship Holder</td>
-        <td>Indicates scholarship status (1 = Yes; 0 = No).</td>
+        <td>Indicates whether the student holds a scholarship (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>age_at_enrollment</td>
+        <td>Age at enrollment</td>
         <td>Age at Enrollment</td>
-        <td>Student age at the time of enrollment.</td>
+        <td>Age of the student at the time of enrollment.</td>
         <td>Years</td>
       </tr>
       <tr>
-        <td>international_student</td>
+        <td>International</td>
         <td>International Student</td>
         <td>Enrollment as an international student (1 = Yes; 0 = No).</td>
         <td>N/A</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_credited</td>
-        <td>Curricular Units 1st Sem (Credited)</td>
+        <td>Curricular units 1st sem (credited)</td>
+        <td>Curricular Units 1st Sem — Credited</td>
         <td>Number of curricular units credited in the first semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_enrolled</td>
-        <td>Curricular Units 1st Sem (Enrolled)</td>
+        <td>Curricular units 1st sem (enrolled)</td>
+        <td>Curricular Units 1st Sem — Enrolled</td>
         <td>Number of curricular units enrolled in during the first semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_evaluations</td>
-        <td>Curricular Units 1st Sem (Evaluations)</td>
+        <td>Curricular units 1st sem (evaluations)</td>
+        <td>Curricular Units 1st Sem — Evaluations</td>
         <td>Number of evaluations/tests taken in the first semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_approved</td>
-        <td>Curricular Units 1st Sem (Approved)</td>
+        <td>Curricular units 1st sem (approved)</td>
+        <td>Curricular Units 1st Sem — Approved</td>
         <td>Number of curricular units passed in the first semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_grade</td>
-        <td>Curricular Units 1st Sem (Grade)</td>
+        <td>Curricular units 1st sem (grade)</td>
+        <td>Curricular Units 1st Sem — Grade</td>
         <td>Average grade in the first semester.</td>
         <td>Score (0–20)</td>
       </tr>
       <tr>
-        <td>cu_1st_sem_without_evaluations</td>
-        <td>Curricular Units 1st Sem (No Evaluation)</td>
+        <td>Curricular units 1st sem (without evaluations)</td>
+        <td>Curricular Units 1st Sem — Without Evaluations</td>
         <td>Number of curricular units without evaluations in the first semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_credited</td>
-        <td>Curricular Units 2nd Sem (Credited)</td>
+        <td>Curricular units 2nd sem (credited)</td>
+        <td>Curricular Units 2nd Sem — Credited</td>
         <td>Number of curricular units credited in the second semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_enrolled</td>
-        <td>Curricular Units 2nd Sem (Enrolled)</td>
+        <td>Curricular units 2nd sem (enrolled)</td>
+        <td>Curricular Units 2nd Sem — Enrolled</td>
         <td>Number of curricular units enrolled in during the second semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_evaluations</td>
-        <td>Curricular Units 2nd Sem (Evaluations)</td>
+        <td>Curricular units 2nd sem (evaluations)</td>
+        <td>Curricular Units 2nd Sem — Evaluations</td>
         <td>Number of evaluations/tests taken in the second semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_approved</td>
-        <td>Curricular Units 2nd Sem (Approved)</td>
+        <td>Curricular units 2nd sem (approved)</td>
+        <td>Curricular Units 2nd Sem — Approved</td>
         <td>Number of curricular units passed in the second semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_grade</td>
-        <td>Curricular Units 2nd Sem (Grade)</td>
+        <td>Curricular units 2nd sem (grade)</td>
+        <td>Curricular Units 2nd Sem — Grade</td>
         <td>Average grade in the second semester.</td>
         <td>Score (0–20)</td>
       </tr>
       <tr>
-        <td>cu_2nd_sem_without_evaluations</td>
-        <td>Curricular Units 2nd Sem (No Evaluation)</td>
+        <td>Curricular units 2nd sem (without evaluations)</td>
+        <td>Curricular Units 2nd Sem — Without Evaluations</td>
         <td>Number of curricular units without evaluations in the second semester.</td>
         <td>Count</td>
       </tr>
       <tr>
-        <td>unemployment_rate</td>
+        <td>Unemployment rate</td>
         <td>Unemployment Rate</td>
         <td>National unemployment rate during the enrollment year.</td>
         <td>Percent (%)</td>
       </tr>
       <tr>
-        <td>inflation_rate</td>
+        <td>Inflation rate</td>
         <td>Inflation Rate</td>
         <td>National inflation rate during the enrollment year.</td>
         <td>Percent (%)</td>
       </tr>
       <tr>
-        <td>gdp</td>
+        <td>GDP</td>
         <td>Gross Domestic Product (GDP)</td>
-        <td>National GDP indicator for the enrollment year.</td>
-        <td>Currency (Index)</td>
+        <td>Annual GDP growth for the enrollment year.</td>
+        <td>Annual GDP growth (%)</td>
       </tr>
       <tr>
-        <td>target</td>
+        <td>Target</td>
         <td>Outcome (Target Variable)</td>
-        <td>Final student outcome: 0 = Dropout, 1 = Enrolled, 2 = Graduate.</td>
+        <td>Final student outcome recorded at the end of the program’s nominal duration (3 years; 4 for Nursing): 0 = Dropout, 1 = Enrolled, 2 = Graduate.</td>
         <td>N/A</td>
       </tr>
     </tbody>
   </table>
 </details>
 
-### 3) Units of Measurement
-- **Grades (admission / previous qualification):** 0–200 scale  
-- **Semester grades:** 0–20 scale  
-- **Age:** Years  
-- **Macroeconomic indicators:** Percent (%) for unemployment and inflation; GDP as indexed currency  
-- **Counts:** Integer counts for curricular-unit fields (credited, enrolled, approved, evaluations)
+### 3) Units of Measurement - Summary (Details See Data Dictionary Above)
+> **Breakdown:** **19 predictors with units**, **17 predictors N/A**, **1 target (categorical) N/A**
+- **Count (integer events)**  
+  - *Curricular units — first semester (5) 
+  - *Curricular units — second semester (5)
+- **Score (0–200):** `previous_qualification_grade`, `admission_grade`  
+- **Semester grade (0–20):** `cu_1st_sem_grade`, `cu_2nd_sem_grade`  
+- **Time — years:** `age_at_enrollment`  
+- **Percent (%):** `unemployment_rate`, `inflation_rate`, `gdp` *(annual GDP growth %)*  
+- **Rank (1–9):** `application_order`
+- **N/A units — 17 predictors + 1 Target variable** *(categorical/flags; no physical units)*:  
+`marital_status`, `application_mode`, `course`, `daytime_evening_attendance`, `previous_qualification`, `nationality`, `mother_qualification`, `father_qualification`, `mother_occupation`, `father_occupation`, `displaced`, `educational_special_needs`, `debtor`, `tuition_fees_up_to_date`, `gender`, `scholarship_holder`, `international_student`, `target` 
 
-### Missing-Data Codes
+
+### 4) Missing-Data Codes
 - No missing data
 
-### Specialized Formats / Abbreviations
+### 5) Specialized Formats / Abbreviations
 - Distributed as **CSV (UTF-8)**  
 - Categorical variables stored as **integer codes**  
 - Outcome variable **target** encoded as `0 = Dropout`, `1 = Enrolled`, `2 = Graduate`
